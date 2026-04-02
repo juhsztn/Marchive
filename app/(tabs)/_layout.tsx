@@ -1,7 +1,10 @@
-import { Tabs } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { Redirect, Tabs } from 'expo-router';
+import { auth } from '../../firebase';
 
 export default function TabLayout() {
+  if (!auth.currentUser) return <Redirect href="/(auth)/login" />;
+
   return (
     <Tabs
       screenOptions={{
@@ -13,8 +16,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <Ionicons name="car-sport" size={24} color={color} />,
+          href: null,
         }}
       />
       <Tabs.Screen
